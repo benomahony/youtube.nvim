@@ -193,23 +193,20 @@ function M.search()
 	end)
 end
 
-function M.play_url()
-	vim.ui.input({ prompt = "YouTube URL: " }, function(url)
-		if url and url ~= "" then
-			play_video(url)
-		end
-	end)
-end
-
 function M.setup(opts)
 	config = vim.tbl_deep_extend("force", config, opts or {})
 
 	vim.api.nvim_create_user_command("YouTube", M.search, {})
-	vim.api.nvim_create_user_command("YouTubeURL", M.play_url, {})
 
 	if config.keymap then
 		vim.keymap.set("n", config.keymap, M.search, { desc = "Search YouTube" })
 	end
+end
+
+-- Auto-setup with defaults if no explicit setup call
+if not _G._youtube_setup_called then
+	M.setup()
+	_G._youtube_setup_called = true
 end
 
 return M

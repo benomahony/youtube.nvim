@@ -24,24 +24,28 @@ A Neovim plugin for searching and playing YouTube videos directly from your edit
 ### Lazy.nvim
 
 ```lua
-{
-  "your-username/youtube.nvim",
-  dependencies = {
-    {
-      "folke/snacks.nvim",
-      opts = {
-        picker = { enabled = true },
-        -- Enable image support for thumbnails
-        image = { enabled = true },
-      }
-    }
-  },
-  config = function()
-    require("youtube").setup()
-  end,
-  keys = {
-    { "<leader>sy", "<cmd>YouTube<cr>", desc = "Search YouTube" },
-  },
+return {
+  "benomahony/youtube.nvim",
+}
+```
+
+That's it! The plugin will automatically:
+
+- Set up the `:YouTube` command
+- Create the `<leader>sy` keymap for YouTube search
+- Configure sensible defaults
+
+### Dependencies
+
+Make sure you have snacks.nvim with image support:
+
+```lua
+return {
+  "folke/snacks.nvim",
+  opts = {
+    picker = { enabled = true },
+    image = { enabled = true },
+  }
 }
 ```
 
@@ -97,7 +101,6 @@ require("youtube").setup({
 ### Commands
 
 - `:YouTube` - Search YouTube videos
-- `:YouTubeURL` - Play a specific YouTube URL
 
 ### Default Keymap
 
@@ -114,6 +117,7 @@ require("youtube").setup({
 ## Player Configuration Examples
 
 ### mpv
+
 ```lua
 require("youtube").setup({
   player_cmd = { "mpv", "--ytdl-format=best" },
@@ -121,6 +125,7 @@ require("youtube").setup({
 ```
 
 ### VLC
+
 ```lua
 require("youtube").setup({
   player_cmd = { "vlc" },
@@ -128,6 +133,7 @@ require("youtube").setup({
 ```
 
 ### Browser
+
 ```lua
 require("youtube").setup({
   player_cmd = { "firefox" },
@@ -135,6 +141,7 @@ require("youtube").setup({
 ```
 
 ### Custom Script
+
 ```lua
 require("youtube").setup({
   player_cmd = { "/path/to/your/player-script.sh" },
@@ -161,22 +168,26 @@ require("snacks").setup({
 ## Troubleshooting
 
 ### No results found
+
 - Ensure `yt-dlp` is installed and in your PATH
 - Check your internet connection
 - Try a different search query
 
 ### Thumbnails not showing
+
 - Verify snacks.nvim image support is configured
 - Check your terminal supports images
 - Ensure `curl` is available
 - Check cache directory permissions
 
 ### Video won't play
+
 - Verify your player command is correct
 - Test the player command manually
 - Check if the player supports YouTube URLs
 
 ### Performance issues
+
 - Reduce `initial_results` for faster startup
 - Increase `background_delay` for slower systems
 - Clear thumbnail cache: `rm -rf ~/.cache/nvim/youtube_thumbnails`
