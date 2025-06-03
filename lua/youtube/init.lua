@@ -111,7 +111,8 @@ local function create_youtube_picker(query, initial_results)
 	vim.fn.mkdir(cache_dir, "p")
 
 	create_picker_items_async(initial_results, cache_dir, function(picker_items)
-		local picker = require("snacks.picker").pick({
+		local picker = Snacks.picker({
+			source = "youtube",
 			items = picker_items,
 			format = function(item)
 				return { { item.text, "Normal" } }
@@ -148,7 +149,8 @@ local function create_youtube_picker(query, initial_results)
 							if #more_results > #initial_results then
 								picker:close()
 								create_picker_items_async(more_results, cache_dir, function(new_picker_items)
-									require("snacks.picker").pick({
+									Snacks.picker({
+										source = "youtube",
 										items = new_picker_items,
 										format = function(item)
 											return { { item.text, "Normal" } }
