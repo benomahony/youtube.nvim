@@ -203,10 +203,4 @@ function M.setup(opts)
 	end
 end
 
--- Auto-setup with defaults if no explicit setup call
-if not _G._youtube_setup_called then
-	M.setup()
-	_G._youtube_setup_called = true
-end
-
 return M

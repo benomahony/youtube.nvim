@@ -26,6 +26,9 @@ A Neovim plugin for searching and playing YouTube videos directly from your edit
 ```lua
 return {
   "benomahony/youtube.nvim",
+  opts = {
+    keymap = "<leader>sy",
+  },
 }
 ```
 
